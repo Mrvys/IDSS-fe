@@ -3,17 +3,69 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <br>
+
   <!--<form>
     Search for keywords:<br>
     &lt;!&ndash;<input type="text" name="keywords" ([ngModel])="data.keywords">&ndash;&gt;<br>
    &lt;!&ndash; <input [(ngModel)]="data.keywords" placeholder="First Name" name="keywords" class="form-control" id="keywords">&ndash;&gt;
     <input type="button" (click)="sendToServer()" value="Submit">
   </form>-->
-
-  <div class="form-group">
-    <label for="keywords">Search for keywords:</label>
-    <input [(ngModel)]="data.keywords" placeholder="keywords" name="keywords" class="form-control" id="keywords">
-    <input type="button" (click)="sendToServer()" value="Submit">
+  <div class="row">
+  <div class="col-4" style="margin-left: 100px;">
+    <p>Please select your parameters and press Submit</p>
+    <div class="row-sm-5">
+      <form [formGroup]="sliderForm">
+        <!--<p>Low value: {{ sliderForm.value.sliderControl[0] }}</p>
+        <p>High value: {{ sliderForm.value.sliderControl[1] }}</p>-->
+        <label>Price range (€)</label>
+        <ng5-slider [options]="options" formControlName="sliderControl"></ng5-slider>
+      </form>
+    </div>
+  <br>
+    <div class="row-sm-5">
+      <div class="form-group">
+        <label for="keywords">Search for keywords</label>
+        <input [(ngModel)]="data.keywords" placeholder="keywords" name="keywords" class="form-control" id="keywords">
+        <br>
+        <input type="button" (click)="sendToServer()" value="Submit">
+      </div>
+    </div>
+    <!--<div class="col-sm-4">
+      <select  class='form-control'
+               (change)="ChangingValue($event)" [value]='46'>
+        <option value='47'>47</option>
+        <option value='46'>46</option>
+        <option value='45'>45</option>
+      </select>
+      <select id="select-type-basic" [(ngModel)]="country">
+        <option *ngFor="let country_item of countriesList">
+          {{country_item}}
+        </option>
+      </select>
+    </div>-->
+    </div>
+    <div class="col-2"></div>
+    <br>
+  <div class="col-4" *ngIf="showTable" >
+    <p>Here is best suitable wine for you</p>
+    <table class="table table-bordered" >
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of wines; index as b">
+        <th scope="row">{{b+1}}</th>
+        <td *ngFor="let j of i"> {{ j }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
 </div>
 
